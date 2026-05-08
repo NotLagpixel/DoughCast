@@ -1,0 +1,122 @@
+{
+  "theme": {
+    "archetype": "1 (Organic & Earthy)",
+    "mode": "Light",
+    "description": "A warm, inviting, and professional aesthetic inspired by morning baking. Uses earthy tones, warm whites, and deep espresso browns for high contrast legibility instead of harsh blacks. Avoids typical 'SaaS Blue' and sterile tech looks, focusing on a tactile, grounded feeling."
+  },
+  "colors": {
+    "background": {
+      "default": "#FDFBF7",
+      "surface": "#FFFFFF",
+      "surface_alt": "#F4F0EA",
+      "overlay": "rgba(62, 39, 35, 0.4)"
+    },
+    "text": {
+      "primary": "#3E2723",
+      "secondary": "#795548",
+      "tertiary": "#A1887F",
+      "inverse": "#FFFFFF"
+    },
+    "primary": {
+      "DEFAULT": "#D95A4E",
+      "hover": "#C2493D",
+      "light": "#FAD4D0"
+    },
+    "secondary": {
+      "DEFAULT": "#E8A365",
+      "hover": "#D68D4C"
+    },
+    "status": {
+      "success": "#4CAF50",
+      "warning": "#FF9800",
+      "error": "#F44336",
+      "info": "#2196F3"
+    },
+    "border": {
+      "default": "#EAE0D5",
+      "focus": "#D95A4E"
+    }
+  },
+  "typography": {
+    "fonts": {
+      "headings": "'Outfit', sans-serif",
+      "body": "'Manrope', sans-serif",
+      "mono": "'JetBrains Mono', monospace"
+    },
+    "sizes": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tight",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight",
+      "h3": "text-xl sm:text-2xl tracking-tight",
+      "h4": "text-lg sm:text-xl font-medium",
+      "body": "text-base leading-relaxed",
+      "small": "text-sm",
+      "overline": "text-xs uppercase tracking-[0.2em] font-bold text-[#795548]"
+    }
+  },
+  "spacing_and_layout": {
+    "philosophy": "Generous spacing. Containers with borders must use p-6 or p-8 to prevent text collision.",
+    "dashboard_grid": {
+      "container": "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6",
+      "hero_widget": "col-span-1 md:col-span-3 lg:col-span-4 lg:row-span-1",
+      "main_chart": "col-span-1 md:col-span-2 lg:col-span-3",
+      "side_list": "col-span-1 md:col-span-1 lg:col-span-1"
+    },
+    "radii": {
+      "card": "rounded-2xl",
+      "button": "rounded-full",
+      "input": "rounded-xl"
+    }
+  },
+  "components": {
+    "navbar": {
+      "background": "backdrop-blur-xl bg-[#FDFBF7]/80",
+      "border": "border-b border-[#EAE0D5]",
+      "layout": "Sticky top-0 z-50 flex items-center justify-between px-6 py-4"
+    },
+    "cards": {
+      "background": "bg-white",
+      "border": "border border-[#EAE0D5]",
+      "shadow": "shadow-sm",
+      "hover": "hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 ease-out"
+    },
+    "buttons": {
+      "primary": "bg-[#D95A4E] text-white hover:bg-[#C2493D] font-medium transition-colors",
+      "secondary": "bg-[#F4F0EA] text-[#3E2723] hover:bg-[#EAE0D5] font-medium transition-colors",
+      "ghost": "bg-transparent text-[#795548] hover:bg-[#F4F0EA] hover:text-[#3E2723] transition-colors"
+    },
+    "forms": {
+      "input": "bg-white border border-[#EAE0D5] focus:border-[#D95A4E] focus:ring-2 focus:ring-[#FAD4D0] text-[#3E2723] placeholder:text-[#A1887F]",
+      "label": "text-sm font-medium text-[#795548] mb-1.5 block"
+    }
+  },
+  "animations": {
+    "hover": "transition-all duration-200 ease-in-out",
+    "entrance": "animate-in fade-in slide-in-from-bottom-4 duration-500",
+    "stagger": "delay-[50ms]"
+  },
+  "media": {
+    "hero_marketing": {
+      "url": "https://images.unsplash.com/photo-1704500390269-1b226c48d130?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxNzV8MHwxfHNlYXJjaHwyfHxiYWtlciUyMHdvcmtpbmclMjBtb3JuaW5nfGVufDB8fHx8MTc3NzY4MzAyNHww&ixlib=rb-4.1.0&q=85",
+      "description": "Man in a white shirt putting donuts into an oven. Use in the marketing landing page hero section with a dark overlay.",
+      "overlay": "bg-black/40"
+    },
+    "auth_background": {
+      "url": "https://images.unsplash.com/photo-1733754348967-62a6870f51b7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwxfHxkb251dHMlMjBiYWtlcnklMjBkaXNwbGF5fGVufDB8fHx8MTc3NzY4MzAyNHww&ixlib=rb-4.1.0&q=85",
+      "description": "Close up of doughnuts baking. Perfect for the split-screen background on the login/signup page. Add a warm overlay to ensure contrast if text is placed on top.",
+      "overlay": "bg-[#3E2723]/60"
+    },
+    "dashboard_illustration": {
+      "url": "https://images.unsplash.com/photo-1775906010906-766c9de3017f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwzfHxkb251dHMlMjBiYWtlcnklMjBkaXNwbGF5fGVufDB8fHx8MTc3NzY4MzAyNHww&ixlib=rb-4.1.0&q=85",
+      "description": "Display case of donuts. Use as an accent image in the dashboard (e.g., inside the 'Tomorrow's Prediction' hero card or empty state)."
+    }
+  },
+  "instructions_to_main_agent": [
+    "Do not use generic Inter font. Import Outfit for headings and Manrope for body text via Google Fonts.",
+    "Do not use standard Tailwind gray (slate, gray, zinc). Use the custom earthy brown hex codes provided for text and backgrounds.",
+    "For the dashboard grid, strictly use the layout defined in spacing_and_layout.dashboard_grid. The main prediction card should span the top row.",
+    "Ensure all interactive elements have explicit hover states altering background color and transform.",
+    "Include 'data-testid' on all interactive elements (buttons, links, form inputs) using kebab-case role-based names.",
+    "Shadcn UI components should be heavily customized via Tailwind classes to match this rounded, organic, and warm theme. Avoid the default Vercel-like sharp aesthetic.",
+    "Dashboard should be a single page displaying: a hero card (tomorrow's prediction), a placeholder for a Recharts line chart (historical sales), and a Shadcn table (recent batches)."
+  ]
+}

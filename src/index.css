@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    margin: 0;
+    font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #FDFBF7;
+    color: #3E2723;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.01em;
+}
+
+code, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+    :root {
+        /* Earthy bakery palette mapped to shadcn tokens */
+        --background: 35 50% 98%;            /* #FDFBF7 */
+        --foreground: 12 36% 19%;            /* #3E2723 */
+        --card: 0 0% 100%;
+        --card-foreground: 12 36% 19%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 12 36% 19%;
+        --primary: 5 65% 57%;                /* #D95A4E */
+        --primary-foreground: 0 0% 100%;
+        --secondary: 32 33% 94%;             /* #F4F0EA */
+        --secondary-foreground: 12 36% 19%;
+        --muted: 32 33% 94%;
+        --muted-foreground: 19 27% 40%;      /* #795548 */
+        --accent: 28 71% 65%;                /* #E8A365 */
+        --accent-foreground: 12 36% 19%;
+        --destructive: 0 84% 55%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 32 30% 88%;                /* #EAE0D5 */
+        --input: 32 30% 88%;
+        --ring: 5 65% 57%;
+        --chart-1: 5 65% 57%;
+        --chart-2: 28 71% 65%;
+        --chart-3: 19 27% 40%;
+        --chart-4: 142 38% 49%;
+        --chart-5: 36 88% 57%;
+        --radius: 1rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+@layer utilities {
+    .grain-overlay {
+        position: relative;
+    }
+    .grain-overlay::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        opacity: 0.6;
+        mix-blend-mode: multiply;
+    }
+
+    .text-balance { text-wrap: balance; }
+    .text-pretty { text-wrap: pretty; }
+
+    .dot-pattern {
+        background-image: radial-gradient(rgba(121, 85, 72, 0.18) 1px, transparent 1px);
+        background-size: 22px 22px;
+    }
+}
+
+/* Subtle scrollbar styling */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #F4F0EA; }
+::-webkit-scrollbar-thumb { background: #D7C7B5; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #C2493D; }
+
+/* Preserve debug wrapper behavior from template */
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
+    }
+}

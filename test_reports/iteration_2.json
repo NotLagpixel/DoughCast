@@ -1,0 +1,41 @@
+{
+  "summary": "v0.4 regression + new-feature E2E testing. 11/12 backend tests pass; all critical v0.4 UI flows pass (Bakery|Account tabs, closed-days picker with auto-save, AccountTab, password mismatch toast, wrong current-password toast, successful password change + re-login with new password, session persistence on reload, authed-redirect from / to /dashboard). ONE BACKEND BUG: JWT TTL is still 7 days in server.py (ACCESS_TTL_DAYS=7); spec v0.4 requires 30 days.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "/api/auth/login & /api/auth/register (token issuance)", "issue": "JWT exp is ~7 days, spec requires 30-day TTL. server.py line 33 has ACCESS_TTL_DAYS = 7 — should be 30.", "priority": "HIGH"}
+    ],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_v04_features.py",
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_v04.xml"
+  ],
+  "action_items": [
+    "Fix JWT TTL: in /app/backend/server.py change `ACCESS_TTL_DAYS = 7` to `ACCESS_TTL_DAYS = 30`. This is a one-line fix and directly addresses the v0.4 spec item 'Extended JWT TTL to 30 days'."
+  ],
+  "critical_code_review_comments": [
+    "BUG: ACCESS_TTL_DAYS=7 contradicts the v0.4 feature 'Extended JWT TTL to 30 days'. Although the frontend already persists the token to localStorage so session-reload works, logged-in users will still be silently booted on day 8.",
+    "Profile update PUT /api/profile does NOT re-issue a new JWT when the email changes. Existing tokens encode 'email' in the payload but get_current_user only looks up by sub (id), so functionally fine — but the 'email' claim in the token becomes stale. Low priority.",
+    "Avatar size limit is enforced via raw string length (>1_400_000 chars). A 256px JPEG at quality 0.82 is ~25–60KB so the limit is generous, but base64 inflation (~1.37×) means ~1MB binary = ~1.4MB string — the 1.4M literal is OK, but comment in code says '~1MB cap' which is actually >1MB of binary. Cosmetic.",
+    "Dashboard.jsx now wraps auto-save debounce with Tabs/closed-days; auto-save correctly fires on closed-days toggle (verified 'All saved' within ~2s).",
+    "get_or_create_settings backfills closed_days=[] for legacy rows — good defensive migration.",
+    "Forecast still returns a positive 'predicted' on closed days (reference-only) with is_closed=true and closed_reason — matches spec."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_v04_features.py (created — 12 new tests)",
+    "/app/test_reports/pytest/pytest_v04.xml (generated)"
+  ],
+  "success_rate": {"backend": "91.7% (11/12)", "frontend": "100% (all v0.4 critical flows)"},
+  "test_credentials": "Fresh users registered dynamically per run: v04-<ts>@doughcast.com / mochi123. Existing mochi@doughcast.com / mochi123 also verified by previous iteration.",
+  "seed_data_creation": "None persistent — all test users disposable.",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "v0.4 backend tests in /app/backend/tests/test_v04_features.py cover closed_days default/dedup/sort/range-clip, forecast is_closed toggling on tomorrow's weekday, profile update (bakery_name mirror to settings, email change + duplicate 400, avatar set/clear, >1.4MB avatar 413), password change (wrong current 400, successful + login with new password), and a JWT TTL decode check expecting ~30 days. After the TTL fix, just re-run this file. UI testids confirmed working: settings-tab-bakery, settings-tab-account, account-tab-content, closed-day-{mon..sun}, forecast-closed-badge (only visible when tomorrow's weekday matches), avatar-upload-btn, avatar-file-input, avatar-remove-btn, account-bakery-name-input, account-email-input, account-save-profile-btn, password-current-input, password-new-input, password-confirm-input, password-change-btn. Auto-save debounce 650ms — wait ~2s and check [data-testid=settings-save-status] text contains 'saved'.",
+  "rca of the issue": "JWT TTL mismatch RCA: /app/backend/server.py line 33 — `ACCESS_TTL_DAYS = 7`. The v0.4 spec 'Extended JWT TTL to 30 days' was not applied to this constant. Reproduction: register a new user, decode the returned token's `exp` claim, compute `(exp - now)/86400` → 7.00 days (expected ~30). Fix: change the constant to 30. No other locations reference the TTL value."
+}
